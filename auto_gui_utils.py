@@ -21,6 +21,7 @@ if util_submodule_import_check_count != len(util_submodule_l)    :    raise Exce
 
 
 import pyautogui as pag
+import time
 
 
 
@@ -35,9 +36,14 @@ import pyautogui as pag
 
 def click_when_appears(img_path, timeout = None):
     start = None
+    start_time = time.time()
     
     while(start == None):
         start = pag.locateCenterOnScreen(img_path)#If the file is not a png file it will not work
+        
+        if timeout != None and time.time() - start_time > timeout:
+            raise Exception("ERROR:  Timeout reached: " + str(timeout) + " seconds have passed and the image has not been found in the foreground of the main display:  " + img_path)
+        
 #     print(start)
     pag.moveTo(start)#Moves the mouse to the coordinates of the image
     pag.click(start)
@@ -55,7 +61,7 @@ if __name__ == '__main__':
     print('In Main:  auto_gui_utils')
     
     
-    fu.set_foreground('Internet Explorer')
+#     fu.set_foreground('Internet Explorer(2)')
     
     
     
