@@ -27,11 +27,8 @@ import time
 
 
 
-
-# start = pyautogui.locateCenterOnScreen('del_btn.PNG')#If the file is not a png file it will not work
-# print(start)
-# pyautogui.moveTo(start)#Moves the mouse to the coordinates of the image
-
+def click():
+    pag.click()
 
 
 def click_when_appears(img_path, timeout = None):
