@@ -41,7 +41,7 @@ def click_when_appears(img_path, timeout = None):
         if timeout != None and time.time() - start_time > timeout:
             raise Exception("ERROR:  Timeout reached: " + str(timeout) + " seconds have passed and the image has not been found in the foreground of the main display:  \n" + img_path)
         
-#     print(start)
+    print(start)
     pag.moveTo(start)#Moves the mouse to the coordinates of the image
     pag.click(start)
 
