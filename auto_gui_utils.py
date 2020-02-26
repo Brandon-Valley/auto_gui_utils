@@ -42,7 +42,7 @@ def click_when_appears(img_path, timeout = None):
         start = pag.locateCenterOnScreen(img_path)#If the file is not a png file it will not work
         
         if timeout != None and time.time() - start_time > timeout:
-            raise Exception("ERROR:  Timeout reached: " + str(timeout) + " seconds have passed and the image has not been found in the foreground of the main display:  " + img_path)
+            raise Exception("ERROR:  Timeout reached: " + str(timeout) + " seconds have passed and the image has not been found in the foreground of the main display:  \n" + img_path)
         
 #     print(start)
     pag.moveTo(start)#Moves the mouse to the coordinates of the image
