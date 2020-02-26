@@ -1,7 +1,7 @@
 ''' -- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV -- All Utilities Standard Header -- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV -- '''
 import sys, os    ;     sys.path.insert(1, os.path.join(sys.path[0], os.path.dirname(os.path.abspath(__file__)))) # to allow for relative imports, delete any imports under this line
 
-util_submodule_l = []  # list of all imports from local util_submodules that could be imported elsewhere to temporarily remove from sys.modules
+util_submodule_l = ['focus_utils']  # list of all imports from local util_submodules that could be imported elsewhere to temporarily remove from sys.modules
 
 # temporarily remove any modules that could conflict with this file's local util_submodule imports
 og_sys_modules = sys.modules    ;    pop_l = [] # save the original sys.modules to be restored at the end of this file
@@ -12,7 +12,7 @@ util_submodule_import_check_count = 0 # count to make sure you don't add a local
 
 ''' -- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV -- All Utilities Standard: Local Utility Submodule Imports  -- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV -- '''
 
-# import custom_exceptions as ce                                         ; util_submodule_import_check_count += 1
+from util_submodules.focus_utils import focus_utils as fu                  ; util_submodule_import_check_count += 1
 
 ''' ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ '''
 if util_submodule_import_check_count != len(util_submodule_l)    :    raise Exception("ERROR:  You probably added a local util_submodule import without adding it to the util_submodule_l")
@@ -38,8 +38,9 @@ def click_when_appears(img_path, timeout = None):
     
     while(start == None):
         start = pag.locateCenterOnScreen(img_path)#If the file is not a png file it will not work
-    print(start)
+#     print(start)
     pag.moveTo(start)#Moves the mouse to the coordinates of the image
+    pag.click(start)
 
 
 
@@ -52,6 +53,11 @@ sys.modules = og_sys_modules
 ''' ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ '''
 if __name__ == '__main__':
     print('In Main:  auto_gui_utils')
+    
+    
+    fu.set_foreground('Internet Explorer')
+    
+    
     
     img_path = "C:\\Users\\mt204e\\Documents\\projects\\Bitbucket_repo_setup\\bitbucket_repo_setup_scripts\\submodules\\bitbucket_tools\\auto_gui_imgs\\repository_settings_btn.PNG"
     click_when_appears(img_path, timeout = 1)
